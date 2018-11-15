@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+    <classPathEntry
+            location="H:\javautils\M2\mysql\mysql-connector-java\5.1.38\mysql-connector-java-5.1.38.jar" />
+
+    <context id="Tables" targetRuntime="MyBatis3">
+        <!--去除注释 -->
+        <commentGenerator>
+            <property name="suppressAllComments" value="true" />
+        </commentGenerator>
+
+        <!--数据库连接 -->
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="jdbc:mysql://localhost:3306/itjob"
+                        userId="root"
+                        password="root">
+        </jdbcConnection>
+        <!--默认false Java type resolver will always use java.math.BigDecimal if
+              the database column is of type DECIMAL or NUMERIC. -->
+        <javaTypeResolver>
+            <property name="forceBigDecimals" value="false" />
+        </javaTypeResolver>
+
+        <!--生成实体类 指定包名 以及生成的地址 （可以自定义地址，但是路径不存在不会自动创建 使用Maven生成在target目录下，会自动创建） -->
+        <javaModelGenerator targetPackage="net.togogo.bean"
+                            targetProject="H:\zp\ideaProjects\itjob\src\main\java">
+            <property name="enableSubPackages" value="true" />
+            <property name="trimStrings" value="true" />
+        </javaModelGenerator>
+        <!--生成SQLMAP文件 -->
+        <sqlMapGenerator targetPackage="mapper"
+                         targetProject="H:\zp\ideaProjects\itjob\src\main\resources">
+            <property name="enableSubPackages" value="false" />
+        </sqlMapGenerator>
+        <!--生成Dao文件 可以配置 type="XMLMAPPER"生成xml的dao实现 context id="DB2Tables" 修改targetRuntime="MyBatis3" -->
+        <javaClientGenerator type="XMLMAPPER"
+                             targetPackage="net.togogo.mapper"
+                             targetProject="H:\zp\ideaProjects\itjob\src\main\java">
+            <property name="enableSubPackages" value="false" />
+        </javaClientGenerator>
+        <!--对应数据库表 mysql可以加入主键自增 字段命名 忽略某字段等 -->
+        <table tableName="t_user" domainObjectName="User"
+               enableCountByExample="true" enableUpdateByExample="true"
+               enableDeleteByExample="true" enableSelectByExample="true"
+               selectByExampleQueryId="true" />
+        <table tableName="t_resume" domainObjectName="Resume"
+               enableCountByExample="true" enableUpdateByExample="true"
+               enableDeleteByExample="true" enableSelectByExample="true"
+               selectByExampleQueryId="true" />
+        <table tableName="t_job" domainObjectName="Job"
+               enableCountByExample="true" enableUpdateByExample="true"
+               enableDeleteByExample="true" enableSelectByExample="true"
+               selectByExampleQueryId="true" />
+        <table tableName="t_detail" domainObjectName="Detail"
+               enableCountByExample="true" enableUpdateByExample="true"
+               enableDeleteByExample="true" enableSelectByExample="true"
+               selectByExampleQueryId="true" />
+        <table tableName="t_company" domainObjectName="Company"
+               enableCountByExample="true" enableUpdateByExample="true"
+               enableDeleteByExample="true" enableSelectByExample="true"
+               selectByExampleQueryId="true" />
+        <table tableName="t_collect" domainObjectName="Collect"
+               enableCountByExample="true" enableUpdateByExample="true"
+               enableDeleteByExample="true" enableSelectByExample="true"
+               selectByExampleQueryId="true" />
+        <table tableName="t_application" domainObjectName="Application"
+               enableCountByExample="true" enableUpdateByExample="true"
+               enableDeleteByExample="true" enableSelectByExample="true"
+               selectByExampleQueryId="true" />
+
+    </context>
+</generatorConfiguration>

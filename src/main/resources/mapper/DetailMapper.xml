@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="net.togogo.mapper.DetailMapper" >
+  <resultMap id="BaseResultMap" type="net.togogo.bean.Detail" >
+    <id column="Id" property="id" jdbcType="INTEGER" />
+    <result column="jobname" property="jobname" jdbcType="VARCHAR" />
+    <result column="salary" property="salary" jdbcType="VARCHAR" />
+    <result column="num" property="num" jdbcType="INTEGER" />
+    <result column="job_id" property="jobId" jdbcType="INTEGER" />
+    <result column="sex" property="sex" jdbcType="VARCHAR" />
+    <result column="age" property="age" jdbcType="VARCHAR" />
+    <result column="degree" property="degree" jdbcType="VARCHAR" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+    <result column="company_id" property="companyId" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    Id, jobname, salary, num, job_id, sex, age, degree, description, company_id
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="net.togogo.bean.DetailExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from t_detail
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_detail
+    where Id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_detail
+    where Id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="net.togogo.bean.DetailExample" >
+    delete from t_detail
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="net.togogo.bean.Detail" >
+    insert into t_detail (Id, jobname, salary, 
+      num, job_id, sex, age, 
+      degree, description, company_id
+      )
+    values (#{id,jdbcType=INTEGER}, #{jobname,jdbcType=VARCHAR}, #{salary,jdbcType=VARCHAR}, 
+      #{num,jdbcType=INTEGER}, #{jobId,jdbcType=INTEGER}, #{sex,jdbcType=VARCHAR}, #{age,jdbcType=VARCHAR}, 
+      #{degree,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, #{companyId,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="net.togogo.bean.Detail" >
+    insert into t_detail
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        Id,
+      </if>
+      <if test="jobname != null" >
+        jobname,
+      </if>
+      <if test="salary != null" >
+        salary,
+      </if>
+      <if test="num != null" >
+        num,
+      </if>
+      <if test="jobId != null" >
+        job_id,
+      </if>
+      <if test="sex != null" >
+        sex,
+      </if>
+      <if test="age != null" >
+        age,
+      </if>
+      <if test="degree != null" >
+        degree,
+      </if>
+      <if test="description != null" >
+        description,
+      </if>
+      <if test="companyId != null" >
+        company_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="jobname != null" >
+        #{jobname,jdbcType=VARCHAR},
+      </if>
+      <if test="salary != null" >
+        #{salary,jdbcType=VARCHAR},
+      </if>
+      <if test="num != null" >
+        #{num,jdbcType=INTEGER},
+      </if>
+      <if test="jobId != null" >
+        #{jobId,jdbcType=INTEGER},
+      </if>
+      <if test="sex != null" >
+        #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="age != null" >
+        #{age,jdbcType=VARCHAR},
+      </if>
+      <if test="degree != null" >
+        #{degree,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="companyId != null" >
+        #{companyId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="net.togogo.bean.DetailExample" resultType="java.lang.Integer" >
+    select count(*) from t_detail
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_detail
+    <set >
+      <if test="record.id != null" >
+        Id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.jobname != null" >
+        jobname = #{record.jobname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.salary != null" >
+        salary = #{record.salary,jdbcType=VARCHAR},
+      </if>
+      <if test="record.num != null" >
+        num = #{record.num,jdbcType=INTEGER},
+      </if>
+      <if test="record.jobId != null" >
+        job_id = #{record.jobId,jdbcType=INTEGER},
+      </if>
+      <if test="record.sex != null" >
+        sex = #{record.sex,jdbcType=VARCHAR},
+      </if>
+      <if test="record.age != null" >
+        age = #{record.age,jdbcType=VARCHAR},
+      </if>
+      <if test="record.degree != null" >
+        degree = #{record.degree,jdbcType=VARCHAR},
+      </if>
+      <if test="record.description != null" >
+        description = #{record.description,jdbcType=VARCHAR},
+      </if>
+      <if test="record.companyId != null" >
+        company_id = #{record.companyId,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_detail
+    set Id = #{record.id,jdbcType=INTEGER},
+      jobname = #{record.jobname,jdbcType=VARCHAR},
+      salary = #{record.salary,jdbcType=VARCHAR},
+      num = #{record.num,jdbcType=INTEGER},
+      job_id = #{record.jobId,jdbcType=INTEGER},
+      sex = #{record.sex,jdbcType=VARCHAR},
+      age = #{record.age,jdbcType=VARCHAR},
+      degree = #{record.degree,jdbcType=VARCHAR},
+      description = #{record.description,jdbcType=VARCHAR},
+      company_id = #{record.companyId,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="net.togogo.bean.Detail" >
+    update t_detail
+    <set >
+      <if test="jobname != null" >
+        jobname = #{jobname,jdbcType=VARCHAR},
+      </if>
+      <if test="salary != null" >
+        salary = #{salary,jdbcType=VARCHAR},
+      </if>
+      <if test="num != null" >
+        num = #{num,jdbcType=INTEGER},
+      </if>
+      <if test="jobId != null" >
+        job_id = #{jobId,jdbcType=INTEGER},
+      </if>
+      <if test="sex != null" >
+        sex = #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="age != null" >
+        age = #{age,jdbcType=VARCHAR},
+      </if>
+      <if test="degree != null" >
+        degree = #{degree,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="companyId != null" >
+        company_id = #{companyId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where Id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="net.togogo.bean.Detail" >
+    update t_detail
+    set jobname = #{jobname,jdbcType=VARCHAR},
+      salary = #{salary,jdbcType=VARCHAR},
+      num = #{num,jdbcType=INTEGER},
+      job_id = #{jobId,jdbcType=INTEGER},
+      sex = #{sex,jdbcType=VARCHAR},
+      age = #{age,jdbcType=VARCHAR},
+      degree = #{degree,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      company_id = #{companyId,jdbcType=INTEGER}
+    where Id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

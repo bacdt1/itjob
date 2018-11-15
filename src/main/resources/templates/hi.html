@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link th:href="@{/css/common.css}" rel="stylesheet" type="text/css" />
+    <link th:href="@{css/login.css}" rel="stylesheet" type="text/css" />
+    <script th:src="@{js/jquery.js}" type='text/javascript' language="javascript"></script>
+    <title>Title</title>
+    你好
+</head>
+<body class="login_body">
+<div class="login_box">
+    <div class="container">
+
+
+        <div class="clear"></div>
+
+        <div class="login_main">
+
+            <div class="login_top">
+                <div class="top_txt">
+                    <div class="top_txt_content" style="float:left">
+                        没有账号？
+                        <a href="">立即注册</a>
+                    </div>
+                    <div class="top_box whover" style="float:left">账号登录</div>
+                </div>
+                <div class="clear"></div>
+            </div>
+
+
+            <form id="Formlogin" name="Formlogin" method="post">
+                <input type="hidden" name="url" id="url" value="">
+                <div class="login_content">
+                    <!--<div class="img_box"><img th:src="/images/36.jpg" alt="" /></div>-->
+
+
+                    <div class="content_box">
+                        <div class="login_err"></div>
+                        <div class="list">
+                            <input type="text" name="username" id="username" class="input_text_login_user" value="用户名/邮箱/手机号" maxlength="30" style="color:#999999;" />
+                            <input type="text" name="passwordtxt" id="passwordtxt" class="input_text_login_pwd" value="密码"  maxlength="30" style="color:#999999;"/>
+                            <input type="password" name="password" id="password" class="input_text_login_pwd" value=""  maxlength="30" style="display:none"/>
+                        </div>
+                        <div class="auto">
+
+                            <!--<a th:href="">忘记密码？</a>-->
+                            <!--<div class="clear"></div>-->
+                        <!--</div>-->
+                        <div class="input-box-waiting" id="waiting">
+                            正在登录中...
+                        </div>
+                        <div class="clear"></div>
+                        <div class="button"><input type="submit" name="submitlogin" id="login" value="立即登录" class="but_login_335" /></div>
+                    </div>
+                    <!-- 微信二维码登陆 -->
+                    <div class="clear"></div>
+                </div>
+            </form>
+        </div>
+
+    </div>
+</div>
+
+</body>
+</html>
