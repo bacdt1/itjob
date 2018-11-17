@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>职位收藏夹 - 个人会员中心</title>
+
+    <link href="/css/user_personal.css" rel="stylesheet" type="text/css">
+    <link href="/css/user_common.css" rel="stylesheet" type="text/css">
+    <script language="javascript" src="/js/jquery.js" type="text/javascript"></script>
+    <script language="javascript" src="/js/jquery.dialog.js" type="text/javascript"></script>
+    <script type="text/javascript">
+
+    </script>
+</head>
+
+<body>
+<div class="user_top_nav">
+    <div class="main">
+        <div class="ltit"><span id="top_loginform"></span></div>
+        <div class="rlink link_lan">
+
+            <a href="/index">网站首页</a>
+            <a href="/suggest/">意见反馈</a>
+            <script type="text/javascript">
+                //顶部部登录
+                $.get("/logininfo", {"act":"top_loginform"},
+                    function (data,textStatus)
+                    {
+                        $("#top_loginform").html(data);
+                    }
+                );
+                //
+                var headHeight=$(".header").height()+10;
+                var nav=$(".nav");
+                $(window).scroll(function(){
+                    if($(this).scrollTop()>headHeight){
+                        nav.addClass("navFix");
+                    }
+                    else{
+                        nav.removeClass("navFix");
+                    }
+                });
+                //
+                $("#t_so").hover(
+                    function(){
+                        $("#t_so").css("position","relative");
+                        $("#op_search").show();
+                    },
+                    function(){
+                        $("#op_search").hide();
+                        $("#t_so").css("position","");
+                    }
+                );
+                $(".top-search-button").click(function()
+                {
+                    $("body").append('<div id="pageloadingbox">页面加载中....</div><div id="pageloadingbg"></div>');
+                    $("#pageloadingbg").css("opacity", 0.5);
+                    $.get("http://51itjob.net/plus/ajax_search_location.php", {"act":$(this).attr('id'),"key":$("#top-search-key").val()},
+                        function (data,textStatus)
+                        {
+                            window.location.href=data;
+                        }
+                    );
+                });
+            </script>	    </div>
+        <div class="clear"></div>
+    </div>
+</div>
+<div class="user_top_logo">
+    <div class="logobox">
+        <a href="/index"><img src="http://51itjob.net/data/images/logo.png" alt="" border="0" align="absmiddle"></a>
+    </div>
+    <div class="sobox">
+
+
+    </div>
+
+</div>
+<div class="clear"></div>
+</div>
+
+<div class="page_location link_bk">当前位置：<a href="/index">首页</a> &gt; <a href="/userindex">会员中心</a></div>
+<div class="usermain">
+    <div class="leftmenu link_bk">
+        <script type="text/javascript">
+            $(document).ready(function()
+            {
+//会员中心顶部搜索职位简历切换
+                $("#usertopselectbox").hover(
+                    function () {
+                        $(this).find("#selmenu").show();
+                    },
+                    function () {
+                        $(this).find("#selmenu").hide();
+                    }
+                );
+                $(".leftmenu .meunbox li[class!='h']").hover(
+                    function () {
+                        $(this).css("background-color","#F5F5F5");
+                    },
+                    function () {
+                        $(this).css("background-color","#FFFFFF");
+                    }
+                );
+//会员中心顶部搜索职位简历切换 点击选择触发事件
+                $("#usertopselectbox .selmenu").click(function(){
+
+                    var txt=$(this).text();
+
+                    if (txt=="简历")
+                    {
+                        $("#topsotype").val('2');
+                        $("#seltxt").text('简历');
+                        $("#selmenu").text('职位');
+                        $("#selmenu").hide();
+                    }
+                    else
+                    {
+                        $("#topsotype").val('1');
+                        $("#seltxt").text('职位');
+                        $("#selmenu").text('简历');
+                        $("#selmenu").hide();
+                    }
+                });
+//所有提交按钮效果
+                $("input[type='submit'],input[type='button']").hover(
+                    function () {
+                        $(this).addClass("hover");
+                    },
+                    function () {
+                        $(this).removeClass("hover");
+                    }
+                );
+//所有多选按钮效果
+                $(".input_checkbox,.input_checkbox_add").hover(
+                    function () {
+                        $(this).addClass("h");
+                    },
+                    function () {
+                        $(this).removeClass("h");
+                    }
+                );
+//多选
+                $('#chk').click(function(){
+                    $(this).parents("form").find("input[type=checkbox]").attr('checked',$("#chk").attr('checked'))
+                });
+//信息列表背景变色
+                $(".userliststyle").hover(
+                    function () {
+                        $(this).css('background-color','#FCFCFC');
+                    },
+                    function () {
+                        $(this).css('background-color','#FFFFFF');
+                    }
+                );
+            });
+        </script>
+
+        <div class="meun1">
+            <div class="meun2">
+
+                <div class="meunbox">
+                    <div class="tit"><div class="t i2">求职管理</div></div>
+                    <div class="linktxt">
+                        <ul>
+                            <li style="background-color: rgb(255, 255, 255);"><a href="personal_apply.php?act=interview">面试邀请</a></li>
+                            <li><a href="/userfavourite">收藏夹</a></li>
+                            <li style="background-color: rgb(255, 255, 255);"><a href="personal_apply.php?act=apply_jobs">已申请的职位</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="meunbox last">
+                    <div class="tit"><div class="t i3">账号管理</div></div>
+                    <div class="linktxt">
+                        <ul>
+                            <li style="background-color: rgb(255, 255, 255);"><a href="/userprofile">基本资料</a></li>
+                            <li style="background-color: rgb(255, 255, 255);"><a href="personal_user.php?act=password_edit">密码修改</a></li>
+                            <li style="background-color: rgb(255, 255, 255);"><a href="http://51itjob.net/user/login.php?act=logout">安全退出</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>  </div>
+    <div class="rightmain">
+        <div class="bbox1">
+            <div class="apply link_bk">
+                <div class="topnav">
+                    <div class="titleH1">
+                        <div class="h1-title">已申请的职位</div>
+                    </div>
+                    <div class="navs">
+                        <a href="?act=apply_jobs&amp;aetlook=" class="se">所有<span class="h">(1)</span></a>
+                        <a href="?act=apply_jobs&amp;aetlook=1">未查看<span>(1)</span></a>
+                        <a href="?act=apply_jobs&amp;aetlook=2">已查看<span>(0)</span></a>
+                        <div class="clear"></div>
+                    </div>
+                </div>
+                <form action="?act=del_jobs_apply" id="form1" name="form1" method="post">
+                    <div class="toptitle">
+                        <div class="t1"><label><input name="chkAll" type="checkbox" value="" id="chk">&nbsp;&nbsp;职位名称</label> </div>
+                        <div class="t2">公司名称</div>
+                        <div class="t3">投递的简历</div>
+                        <div class="t4">对方查看</div>
+                        <div class="t5">投递时间</div>
+                        <div class="t6">备注</div>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="ilist userliststyle">
+                        <div class="t1"><input name="y_id[]" type="checkbox" id="y_id" value="4291">&nbsp;&nbsp;<a href="http://51itjob.net/jobs/jobs-show.php?id=1451" target="_blank" title="网络工程师（珠海市）">网络工程师（珠海市）</a></div>
+                        <div class="t2"><a href="http://51itjob.net/company/company-show.php?id=444" target="_blank">深圳市华脉技术有限公司</a></div>
+                        <div class="t3"><a href="personal_resume.php?act=edit_resume&amp;pid=1747">未命名简历</a></div>
+                        <div class="t4"><span style="color: #FF3300">[未查看]</span></div>
+                        <div class="t5">2018-11-17</div>
+                        <div class="t6"><img src="http://51itjob.net/templates/default/images/17.jpg" width="14" height="13" title="213" class="vtip"></div>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="but">
+                        <input type="submit" name="delete" id="submitsave" value="删除所选" class="but95_35lan" onclick="return confirm('删除后招聘单位将无法通过职位申请栏目找到您，您确定删除吗?')">
+                    </div>
+                    <table border="0" align="center" cellpadding="0" cellspacing="0" class="link_bk">
+                        <tbody><tr>
+                            <td height="50" align="center"> <div class="page link_bk"><li><a class="">首页</a></li><li><a class="">上一页</a></li><li><a class="select">1</a></li>
+                                <li><a class="">下一页</a></li><li><a class="">尾页</a></li><li class="page_all">1/1页</li><div class="clear"></div></div></td>
+                        </tr>
+                        </tbody></table>
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+
+        <!-- 回到顶部组件 -->
+        <div class="back_to_top" id="back_to_top">
+            <div class="back" style="display:none;">
+                <div>回到顶部</div>
+            </div>
+
+        </div>
+        <script>
+            $(function(){
+                //回到顶部组件出现设置
+                $(window).scroll(function(){
+                    if($(window).scrollTop()>200){
+                        $(".back").fadeIn(400);
+                    }else{
+                        $(".back").fadeOut(400);
+                    }
+                })
+
+                //回到顶部hover效果
+                $(".back_to_top .back, .steer, .sub").hover(function(){
+                    $(this).find("div").css("display","block");
+                },function(){
+                    $(this).find("div").css("display","none");
+                })
+
+                //设置滚回顶部方法
+                $(".back").click(function(){
+                    $("body,html").animate({scrollTop:0}, 500);
+                    return false;
+                })
+            });
+            $(function(){
+                $(".foot_list ul:odd li").css("width", 62);
+                $(".weixin_img:last").css("margin-right", 0);
+            })
+        </script>
+
+
+    </div></div></div></div>
+</body></html>

@@ -13,13 +13,20 @@ public interface UserMapper {
     @Select("select * from t_user where id=#{id}")
     User selectbyid(int id);
 
+    @Select("select * from t_user where username=#{username} ")
+    User selectbyusername(String username);
+
+    @Select("select * from t_user where email=#{email} ")
+    User selectbyemail(String email);
+
     int countByExample(UserExample example);
 
     int deleteByExample(UserExample example);
 
     int deleteByPrimaryKey(Integer id);
 
-    int insert(User record);
+    @Select("insert into t_user(username,password,email) values(#{username},#{password},#{email})")
+    Integer insert(User user);
 
     int insertSelective(User record);
 

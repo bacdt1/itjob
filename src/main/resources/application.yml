@@ -23,6 +23,9 @@
 #  spring.thymeleaf.cache=false
 
 spring:
+  devtools:
+    restart:
+      enabled: true
   profiles:
     active:
   thymeleaf:
@@ -62,7 +65,7 @@ spring:
     useGlobalDataSourceStat: true
     connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=500
 server:
-  port: 8090
+  port: 8080
 
   mybatis:
     typeAliasesPackage: net.togogo.bean

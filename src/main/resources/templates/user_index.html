@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>我的简历 - 个人会员中心</title>
+
+    <link href="/css/user_personal.css" rel="stylesheet" type="text/css">
+    <link href="/css/user_common.css" rel="stylesheet" type="text/css">
+    <script language="javascript" src="/js/jquery.js" type="text/javascript"></script>
+    <script language="javascript" src="/js/jquery.dialog.js" type="text/javascript"></script>
+    <script type="text/javascript">
+
+    </script>
+</head>
+
+<body>
+<div class="user_top_nav">
+    <div class="main">
+        <div class="ltit"><span id="top_loginform"></a></span></div>
+        <div class="rlink link_lan">
+
+            <a href="/index">网站首页</a>
+            <a href="/suggest/">意见反馈</a>
+            <script type="text/javascript">
+                //顶部部登录
+                $.get("/logininfo", {"act":"top_loginform"},
+                    function (data,textStatus)
+                    {
+                        $("#top_loginform").html(data);
+                    }
+                );
+                //
+                var headHeight=$(".header").height()+10;
+                var nav=$(".nav");
+                $(window).scroll(function(){
+                    if($(this).scrollTop()>headHeight){
+                        nav.addClass("navFix");
+                    }
+                    else{
+                        nav.removeClass("navFix");
+                    }
+                });
+                //
+                $("#t_so").hover(
+                    function(){
+                        $("#t_so").css("position","relative");
+                        $("#op_search").show();
+                    },
+                    function(){
+                        $("#op_search").hide();
+                        $("#t_so").css("position","");
+                    }
+                );
+                $(".top-search-button").click(function()
+                {
+                    $("body").append('<div id="pageloadingbox">页面加载中....</div><div id="pageloadingbg"></div>');
+                    $("#pageloadingbg").css("opacity", 0.5);
+                    $.get("http://51itjob.net/plus/ajax_search_location.php", {"act":$(this).attr('id'),"key":$("#top-search-key").val()},
+                        function (data,textStatus)
+                        {
+                            window.location.href=data;
+                        }
+                    );
+                });
+            </script>	    </div>
+        <div class="clear"></div>
+    </div>
+</div>
+<div class="user_top_logo">
+    <div class="logobox">
+        <a href="/index"><img src="http://51itjob.net/data/images/logo.png" alt="" border="0" align="absmiddle"></a>
+    </div>
+    <div class="sobox">
+
+
+        </div>
+
+    </div>
+    <div class="clear"></div>
+</div>
+
+<div class="page_location link_bk">当前位置：<a href="/index">首页</a> &gt; <a href="/userindex">会员中心</a></div>
+<div class="usermain">
+    <div class="leftmenu link_bk">
+        <script type="text/javascript">
+            $(document).ready(function()
+            {
+//会员中心顶部搜索职位简历切换
+                $("#usertopselectbox").hover(
+                    function () {
+                        $(this).find("#selmenu").show();
+                    },
+                    function () {
+                        $(this).find("#selmenu").hide();
+                    }
+                );
+                $(".leftmenu .meunbox li[class!='h']").hover(
+                    function () {
+                        $(this).css("background-color","#F5F5F5");
+                    },
+                    function () {
+                        $(this).css("background-color","#FFFFFF");
+                    }
+                );
+//会员中心顶部搜索职位简历切换 点击选择触发事件
+                $("#usertopselectbox .selmenu").click(function(){
+
+                    var txt=$(this).text();
+
+                    if (txt=="简历")
+                    {
+                        $("#topsotype").val('2');
+                        $("#seltxt").text('简历');
+                        $("#selmenu").text('职位');
+                        $("#selmenu").hide();
+                    }
+                    else
+                    {
+                        $("#topsotype").val('1');
+                        $("#seltxt").text('职位');
+                        $("#selmenu").text('简历');
+                        $("#selmenu").hide();
+                    }
+                });
+//所有提交按钮效果
+                $("input[type='submit'],input[type='button']").hover(
+                    function () {
+                        $(this).addClass("hover");
+                    },
+                    function () {
+                        $(this).removeClass("hover");
+                    }
+                );
+//所有多选按钮效果
+                $(".input_checkbox,.input_checkbox_add").hover(
+                    function () {
+                        $(this).addClass("h");
+                    },
+                    function () {
+                        $(this).removeClass("h");
+                    }
+                );
+//多选
+                $('#chk').click(function(){
+                    $(this).parents("form").find("input[type=checkbox]").attr('checked',$("#chk").attr('checked'))
+                });
+//信息列表背景变色
+                $(".userliststyle").hover(
+                    function () {
+                        $(this).css('background-color','#FCFCFC');
+                    },
+                    function () {
+                        $(this).css('background-color','#FFFFFF');
+                    }
+                );
+            });
+        </script>
+
+        <div class="meun1">
+            <div class="meun2">
+
+                <div class="meunbox">
+                    <div class="tit"><div class="t i2">求职管理</div></div>
+                    <div class="linktxt">
+                        <ul>
+                            <li style="background-color: rgb(255, 255, 255);"><a href="/userinterview">面试邀请</a></li>
+                            <li><a href="/userfavourite">收藏夹</a></li>
+                            <li style="background-color: rgb(255, 255, 255);"><a href="/userapply">已申请的职位</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="meunbox last">
+                    <div class="tit"><div class="t i3">账号管理</div></div>
+                    <div class="linktxt">
+                        <ul>
+                            <li style="background-color: rgb(255, 255, 255);"><a href="/userprofile">基本资料</a></li>
+                            <li style="background-color: rgb(255, 255, 255);"><a href="personal_user.php?act=password_edit">密码修改</a></li>
+                            <li style="background-color: rgb(255, 255, 255);"><a href="http://51itjob.net/user/login.php?act=logout">安全退出</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>  </div>
+    <div class="rightmain">
+        <div class="bbox1">
+            <div class="pindex-info">
+                <div class="leftbox">
+                    <div class="">
+                        <img name="" src="http://51itjob.net/templates/default/images/06.jpg" width="100" height="100" alt="">
+                    </div>
+                    <a href="personal_user.php?act=avatars" class="edit">修改头像</a>
+                </div>
+                <div class="cbox">
+                    <div class="name  h1-title">gy15</div>
+                    <div class="txt">
+                        <span class="e">邮箱认证：</span>&nbsp;&nbsp;<span style="color:#009900">已认证</span>&nbsp;&nbsp;&nbsp;823949548@qq.com<br>
+
+                        <a href="personal_user.php?act=userprofile" class="edit">编辑个人资料</a>
+                    </div>
+                </div>
+                <div class="rbox">
+                    <div class="mli">
+                        <div class="imgbox" mark="apply_jobs">
+                            <div class="count">0</div>
+                            <div class="txt">已申请职位</div>
+                        </div>
+                    </div>
+                    <div class="mli">
+                        <div class="imgbox" mark="interview">
+                            <div class="count">0</div>
+                            <div class="txt">面试邀请</div>
+                        </div>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+                <div class="clear"></div>
+            </div>
+
+
+            <div class="myrec link_lan">
+
+            </div>
+        </div>
+    </div>
+    <div class="clear"></div>
+</div>
+
+<div class="foot">
+    <div class="footer_box">
+        <div class="box link_bk">
+
+
+            <div class="copyright">
+                联系地址： 联系电话： 网站备案：粤ICP备12042194号-4<br>
+                Copyright @ 2015-2016 51itjob.net All Right Reserved
+            </div>
+        </div>
+        <!-- 回到顶部组件 -->
+        <div class="back_to_top" id="back_to_top">
+            <div class="back" style="display:none;">
+                <div>回到顶部</div>
+            </div>
+
+        </div>
+        <script>
+            $(function(){
+                //回到顶部组件出现设置
+                $(window).scroll(function(){
+                    if($(window).scrollTop()>200){
+                        $(".back").fadeIn(400);
+                    }else{
+                        $(".back").fadeOut(400);
+                    }
+                })
+
+                //回到顶部hover效果
+                $(".back_to_top .back, .steer, .sub").hover(function(){
+                    $(this).find("div").css("display","block");
+                },function(){
+                    $(this).find("div").css("display","none");
+                })
+
+                //设置滚回顶部方法
+                $(".back").click(function(){
+                    $("body,html").animate({scrollTop:0}, 500);
+                    return false;
+                })
+            });
+            $(function(){
+                $(".foot_list ul:odd li").css("width", 62);
+                $(".weixin_img:last").css("margin-right", 0);
+            })
+        </script>
+
+
+    </div></div><div id="AutocompleteContainter_be56d" style="position: absolute; z-index: 9999; top: 98px; left: 1080px;"><div class="autocomplete-w1"><div class="autocomplete" id="Autocomplete_be56d" style="display: none; width: 360px; max-height: 400px;"></div></div></div>
+</body></html>
