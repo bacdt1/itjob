@@ -2,7 +2,7 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>职位收藏夹 - 个人会员中心</title>
+    <title>我的简历 - 个人会员中心</title>
 
     <link href="/css/user_personal.css" rel="stylesheet" type="text/css">
     <link href="/css/user_common.css" rel="stylesheet" type="text/css">
@@ -16,14 +16,14 @@
 <body>
 <div class="user_top_nav">
     <div class="main">
-        <div class="ltit"><span id="top_loginform"></span></div>
+        <div class="ltit"><span id="top_loginform"></a></span></div>
         <div class="rlink link_lan">
 
             <a href="/index">网站首页</a>
             <a href="/suggest/">意见反馈</a>
             <script type="text/javascript">
                 //顶部部登录
-                $.get("/logininfo", {"act":"top_loginform"},
+                $.get("/companylogininfo", {"act":"top_loginform"},
                     function (data,textStatus)
                     {
                         $("#top_loginform").html(data);
@@ -160,12 +160,12 @@
             <div class="meun2">
 
                 <div class="meunbox">
-                    <div class="tit"><div class="t i2">求职管理</div></div>
+                    <div class="tit"><div class="t i2">职位管理</div></div>
                     <div class="linktxt">
                         <ul>
-                            <li style="background-color: rgb(255, 255, 255);"><a href="/userinterview">面试邀请</a></li>
-                            <li><a href="/userfavourite">收藏夹</a></li>
-                            <li style="background-color: rgb(255, 255, 255);"><a href="/userapply">已申请的职位</a></li>
+                            <li style="background-color: rgb(255, 255, 255);"><a href="/companyinterview">面试邀请</a></li>
+                            <li><a href="/jobpublish">发布职位</a></li>
+                            <li style="background-color: rgb(255, 255, 255);"><a href="/jobmanage">管理职位</a></li>
                         </ul>
                     </div>
                 </div>
@@ -173,97 +173,94 @@
                     <div class="tit"><div class="t i3">账号管理</div></div>
                     <div class="linktxt">
                         <ul>
-                            <li style="background-color: rgb(255, 255, 255);"><a href="/userprofile">基本资料</a></li>
-                            <li style="background-color: rgb(255, 255, 255);"><a href="/userpassword">密码修改</a></li>
+                            <li style="background-color: rgb(255, 255, 255);"><a href="/companyprofile">企业资料</a></li>
+                            <li style="background-color: rgb(255, 255, 255);"><a href="/companypassword">密码修改</a></li>
                             <li style="background-color: rgb(255, 255, 255);"><a href="/logout">安全退出</a></li>
                         </ul>
                     </div>
                 </div>
             </div>
         </div>  </div>
+
     <div class="rightmain">
         <div class="bbox1">
-            <div class="apply link_bk">
+            <div class="interview link_bk">
                 <div class="topnav">
                     <div class="titleH1">
-                        <div class="h1-title">已申请的职位</div>
+                        <div class="h1-title">面试邀请</div>
                     </div>
                     <div class="navs">
-                        <a href="?act=apply_jobs&amp;aetlook=" class="se">所有<span class="h"></span></a>
+                        <a href="?act=interview&amp;look=" class="se">所有<span class="h"></span></a>
 
                         <div class="clear"></div>
                     </div>
                 </div>
-                <form action="?act=del_jobs_apply" id="form1" name="form1" method="post">
-                    <div class="toptitle">
-                        <div class="t1"><label><input name="chkAll" type="checkbox" value="" id="chk">&nbsp;&nbsp;职位名称</label> </div>
-                        <div class="t2">公司名称</div>
-                        <div class="t3">简历状态</div>
-                        <div class="t4">邀请状态</div>
-                        <div class="t5">操作</div>
+                <div class="toptitle">
 
-                        <div class="clear"></div>
-                    </div>
-                    <div class="ilist userliststyle" th:each="apply:${apply}">
-                        <div class="t1"><input name="y_id[]" type="checkbox" id="y_id" value="4291">&nbsp;&nbsp;<a href="http://51itjob.net/jobs/jobs-show.php?id=1451" target="_blank" th:title="${apply.jobname}"><span th:text="${apply.jobname}"></span></a></div>
-                        <div class="t2"><a href="http://51itjob.net/company/company-show.php?id=444" target="_blank"><span th:text="${apply.companyname}"></span></a></div>
-                        <div class="t3"><span>已投递</span></div>
-                        <div class="t4" th:switch="${apply.status}"><span style="color: #200eff" th:case="'1'">[邀请面试]</span><span style="color: #ff2835" th:case="'0'">[暂未邀请]</span><span style="color: #ff2835" th:case="'2'">[暂未邀请]</span></div>
-                        <div class="t5">   <input type="submit" name="delete" id="submitsave" value="取消申请" class="but95_35lan" onclick="return confirm('取消后招聘单位将无法通过职位申请栏目找到您，您确定取消吗?')"></div>
+                    <div class="t1">申请职位</div>
+                    <div class="t2">公司名称</div>
+                    <div class="t3">操作</div>
+                    <div class="clear"></div>
+                </div>
+                <!--<div class="emptytip">对不起！没有找到您要的信息！</div>-->
+                <div class="ilist userliststyle">
+                    <div class="t1"><a href="http://51itjob.net/jobs/jobs-show.php?id=1451" target="_blank" title="网络工程师（珠海市）"><span th:text="456"></span></a></div>
+                    <div class="t2"><span th:text="123"></span></a></div>
+                    <div class="t3"> <a href="/1234" class="but95_35lan" onclick="return confirm('确定忽略吗?') "/> 忽略申请<a href="/1234" class="but95_35lan" onclick="return confirm('确定发出吗?')"/>发出邀请</div>
+                    <!--<div class="t4"> <a href="/1234" class="but95_35lan" onclick="return confirm('确定发出吗?')"/>发出邀请</div>-->
+                    <div class="clear"></div>
+                </div>
 
-                        <div class="clear"></div>
-                    </div>
-
-                    <table border="0" align="center" cellpadding="0" cellspacing="0" class="link_bk">
-                        <tbody><tr>
-                            <td height="50" align="center"> <div class="page link_bk"><li><a class="">首页</a></li><li><a class="">上一页</a></li><li><a class="select">1</a></li>
-                                <li><a class="">下一页</a></li><li><a class="">尾页</a></li><li class="page_all">1/1页</li><div class="clear"></div></div></td>
-                        </tr>
-                        </tbody></table>
-                </form>
+                <table border="0" align="center" cellpadding="0" cellspacing="0" class="link_bk">
+                    <tbody><tr>
+                        <td height="50" align="center"> <div class="page link_bk"><li><a class="">首页</a></li><li><a class="">上一页</a></li><li><a class="select">1</a></li>
+                            <li><a class="">下一页</a></li><li><a class="">尾页</a></li><li class="page_all">1/1页</li><div class="clear"></div></div></td>
+                    </tr>
+                    </tbody></table>
 
             </div>
         </div>
     </div>
 
 
-        <!-- 回到顶部组件 -->
-        <div class="back_to_top" id="back_to_top">
-            <div class="back" style="display:none;">
-                <div>回到顶部</div>
-            </div>
 
+    <!-- 回到顶部组件 -->
+    <div class="back_to_top" id="back_to_top">
+        <div class="back" style="display:none;">
+            <div>回到顶部</div>
         </div>
-        <script>
-            $(function(){
-                //回到顶部组件出现设置
-                $(window).scroll(function(){
-                    if($(window).scrollTop()>200){
-                        $(".back").fadeIn(400);
-                    }else{
-                        $(".back").fadeOut(400);
-                    }
-                })
 
-                //回到顶部hover效果
-                $(".back_to_top .back, .steer, .sub").hover(function(){
-                    $(this).find("div").css("display","block");
-                },function(){
-                    $(this).find("div").css("display","none");
-                })
-
-                //设置滚回顶部方法
-                $(".back").click(function(){
-                    $("body,html").animate({scrollTop:0}, 500);
-                    return false;
-                })
-            });
-            $(function(){
-                $(".foot_list ul:odd li").css("width", 62);
-                $(".weixin_img:last").css("margin-right", 0);
+    </div>
+    <script>
+        $(function(){
+            //回到顶部组件出现设置
+            $(window).scroll(function(){
+                if($(window).scrollTop()>200){
+                    $(".back").fadeIn(400);
+                }else{
+                    $(".back").fadeOut(400);
+                }
             })
-        </script>
+
+            //回到顶部hover效果
+            $(".back_to_top .back, .steer, .sub").hover(function(){
+                $(this).find("div").css("display","block");
+            },function(){
+                $(this).find("div").css("display","none");
+            })
+
+            //设置滚回顶部方法
+            $(".back").click(function(){
+                $("body,html").animate({scrollTop:0}, 500);
+                return false;
+            })
+        });
+        $(function(){
+            $(".foot_list ul:odd li").css("width", 62);
+            $(".weixin_img:last").css("margin-right", 0);
+        })
+    </script>
 
 
-    </div></div></div></div>
+</div></div><div id="AutocompleteContainter_be56d" style="position: absolute; z-index: 9999; top: 98px; left: 1080px;"><div class="autocomplete-w1"><div class="autocomplete" id="Autocomplete_be56d" style="display: none; width: 360px; max-height: 400px;"></div></div></div>
 </body></html>

@@ -25,6 +25,15 @@ public class CollectVO {
     public void setSalary(String salary) {
         this.salary = salary;
     }
+    private Collect collect;
+
+    public Collect getCollect() {
+        return collect;
+    }
+
+    public void setCollect(Collect collect) {
+        this.collect = collect;
+    }
 
     private String jobname;
     private String companyname;

@@ -2,7 +2,7 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>我的简历 - 个人会员中心</title>
+    <title>个人会员中心</title>
 
     <link href="/css/user_personal.css" rel="stylesheet" type="text/css">
     <link href="/css/user_common.css" rel="stylesheet" type="text/css">
@@ -201,13 +201,13 @@
                 <div class="rbox">
                     <div class="mli">
                         <div class="imgbox" mark="apply_jobs">
-                            <div class="count">0</div>
+                            <div class="count"><span th:text="${applynum}"/></div>
                             <div class="txt">已申请职位</div>
                         </div>
                     </div>
                     <div class="mli">
                         <div class="imgbox" mark="interview">
-                            <div class="count">0</div>
+                            <div class="count"><span th:text="${interviewnum}"/></div>
                             <div class="txt">面试邀请</div>
                         </div>
                     </div>

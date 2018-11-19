@@ -1,7 +1,15 @@
 package net.togogo.bean;
 
 public class ApplicationVO {
+    public Application getApplication() {
+        return application;
+    }
 
+    public void setApplication(Application application) {
+        this.application = application;
+    }
+
+    private Application application;
     private String jobname;
     private String companyname;
     private String status;

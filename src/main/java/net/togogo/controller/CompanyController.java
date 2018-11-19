@@ -4,11 +4,15 @@ import net.togogo.bean.Company;
 import net.togogo.mapper.CompanyMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import static javax.swing.text.html.CSS.getAttribute;
 
 @Controller
 public class CompanyController {
@@ -49,6 +53,32 @@ public class CompanyController {
             return false;
         else
             return  true;
+    }
+
+    @RequestMapping("/companylogininfo")
+    @ResponseBody
+    public String companylogininfo(HttpSession session) {
+        String companyname = (String) session.getAttribute("companyname");
+        if (companyname == null)
+            return "欢迎来到IT猎户网 51itjob.net！&nbsp;&nbsp;&nbsp;&nbsp;<a style=\"color:#0066cc\" href=\"/login\">[登录]</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a style=\"color:#0066cc\" href=\"/register\">[免费注册]</a>";
+
+        else
+            return "欢迎&nbsp;&nbsp;<a style=\"color:#339900\" href=\"/companyindex\">" + companyname + "</a> 登录！&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a style=\"color:#0066cc\" href=\"/userindex\">[会员中心]</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a style=\"color:#0066cc\" href=\"/logout\">[退出]";
+
+    }
+
+    @RequestMapping("/companyindex")
+    public String companyindex(HttpSession session, Model model){
+        String companyname = (String) session.getAttribute("companyname");
+        Company company = companyMapper.selectbyusername(companyname);
+        model.addAttribute("company",company);
+        return "company_index";
+
+    }
+
+    @RequestMapping("/companyinterview")
+    public String companyinterview(){
+        return "company/companyinterview";
     }
 
 

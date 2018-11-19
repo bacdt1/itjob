@@ -30,6 +30,18 @@
                     }
                 );
                 //
+
+                $(".t5").click(function () {
+
+                    $.post("/del_interview", {"id":$(this).attr("id")},
+                        function (data,textStatus)
+                        {
+
+                        }
+                    );
+
+
+                });
                 var headHeight=$(".header").height()+10;
                 var nav=$(".nav");
                 $(window).scroll(function(){
@@ -204,9 +216,11 @@
                 </div>
                 <!--<div class="emptytip">对不起！没有找到您要的信息！</div>-->
                 <div class="ilist userliststyle" th:each="interview:${interview}">
-                    <div class="t1"><input name="y_id[]" type="checkbox" id="y_id" value="4291">&nbsp;&nbsp;<a href="http://51itjob.net/jobs/jobs-show.php?id=1451" target="_blank" title="网络工程师（珠海市）"><span th:text="${interview.jobname}"></span></a></div>
-                    <div class="t2"><a href="http://51itjob.net/company/company-show.php?id=444" target="_blank"><span th:text="${interview.companyname}"></span></a></div>
-                    <div class="t5">   <input type="submit" name="delete" id="submitsave" value="拒绝邀请" class="but95_35lan" onclick="return confirm('拒绝后招聘单位将无法通过职位申请栏目找到您，您确定拒绝吗?')"></div>
+                    <div class="t1"><input name="y_id[]" type="checkbox" id="y_id" value="4291">&nbsp;&nbsp;<a href="http://51itjob.net/jobs/jobs-show.php?id=1451" target="_blank" th:title="${interview.jobname}"><span th:text="${interview.jobname}"></span></a></div>
+                    <div class="t2"><span th:text="${interview.companyname}"></span></a></div>
+                    <div class="t5" th:attr="id=${interview.application.id}">   <input type="button" name="delete" id="submitsave" value="拒绝邀请" class="but95_35lan"  onclick="return confirm('拒绝后招聘单位将无法通过职位申请栏目找到您，您确定拒绝吗?')"></div>
+                    <span th:text="${interview.application.id}"/>
+
 
                     <div class="clear"></div>
                 </div>

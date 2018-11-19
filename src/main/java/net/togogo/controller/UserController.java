@@ -1,5 +1,6 @@
 package net.togogo.controller;
 
+import ch.qos.logback.core.net.SyslogOutputStream;
 import com.sun.org.apache.xpath.internal.operations.Mod;
 import net.togogo.bean.*;
 import net.togogo.mapper.*;
@@ -112,8 +113,9 @@ public class UserController {
         if (user != null && user.getUsername().equals(username) && user.getPassword().equals(password)) {
             session.setAttribute("username", username);
             return "success";
-        } else if (company.getUsername().equals(username) && company.getPassword().equals(password)) {
-            session.setAttribute("username", username);
+        } else if (company!=null&&company.getUsername().equals(username) && company.getPassword().equals(password)) {
+            session.setAttribute("companyname", username);
+
             return "succ";
         } else
             return "err";
@@ -150,8 +152,16 @@ public class UserController {
     @RequestMapping("/userindex")
     public String userindex(HttpSession session, Model model) {
         String username = (String) session.getAttribute("username");
+
         User user = userMapper.selectbyusername(username);
+        List<Application> apply = applicationMapper.selectbyuserid(user.getId());
+        List<Application> interview = applicationMapper.selectbystatus(user.getId());
+
+        int applynum = apply.size();
+        int interviewnum = interview.size();
         model.addAttribute("person", user);
+        model.addAttribute("applynum",applynum);
+        model.addAttribute("interviewnum",interviewnum);
 
         return "user_index";
     }
@@ -238,6 +248,7 @@ public class UserController {
         List<ApplicationVO> applicationVOList = new ArrayList<>();
         for(int i=0;i<application.size();i++){
             ApplicationVO applicationVO = new ApplicationVO();
+            applicationVO.setApplication(application.get(i));
             applicationVO.setCompanyname(companyMapper.selectByPrimaryKey(detailMapper.selectbyid(application.get(i).getDetailId()).getCompanyId()).getFullname());
             applicationVO.setJobname(detailMapper.selectbyid(application.get(i).getDetailId()).getJobname());
             applicationVO.setStatus(application.get(i).getState().toString());
@@ -246,6 +257,12 @@ public class UserController {
 
         model.addAttribute("interview",applicationVOList);
         return "user/userinterview";
+    }
+
+    @RequestMapping("del_interview")
+    public void delinterview(String id){
+        System.out.println("该方法传过来的值为"+id);
+
     }
 
     @RequestMapping("test")
