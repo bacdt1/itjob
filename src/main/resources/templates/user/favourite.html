@@ -163,9 +163,9 @@
                     <div class="tit"><div class="t i2">求职管理</div></div>
                     <div class="linktxt">
                         <ul>
-                            <li style="background-color: rgb(255, 255, 255);"><a href="personal_apply.php?act=interview">面试邀请</a></li>
+                            <li style="background-color: rgb(255, 255, 255);"><a href="/userinterview">面试邀请</a></li>
                             <li><a href="/userfavourite">收藏夹</a></li>
-                            <li style="background-color: rgb(255, 255, 255);"><a href="personal_apply.php?act=apply_jobs">已申请的职位</a></li>
+                            <li style="background-color: rgb(255, 255, 255);"><a href="/userapply">已申请的职位</a></li>
                         </ul>
                     </div>
                 </div>
@@ -174,8 +174,8 @@
                     <div class="linktxt">
                         <ul>
                             <li style="background-color: rgb(255, 255, 255);"><a href="/userprofile">基本资料</a></li>
-                            <li style="background-color: rgb(255, 255, 255);"><a href="personal_user.php?act=password_edit">密码修改</a></li>
-                            <li style="background-color: rgb(255, 255, 255);"><a href="http://51itjob.net/user/login.php?act=logout">安全退出</a></li>
+                            <li style="background-color: rgb(255, 255, 255);"><a href="/userpassword">密码修改</a></li>
+                            <li style="background-color: rgb(255, 255, 255);"><a href="/logout">安全退出</a></li>
                         </ul>
                     </div>
                 </div>
@@ -189,9 +189,8 @@
                         <div class="h1-title">职位收藏夹</div>
                     </div>
                     <div class="navs">
-                        <a href="?act=favorites&amp;settr=" class="se">所有的</a>
-                        <a href="?act=favorites&amp;settr=3">最新三天</a>
-                        <a href="?act=favorites&amp;settr=7">最近一周</a>
+                        <a  class="se">所有</a>
+
                         <div class="clear"></div>
                     </div>
                 </div>
@@ -199,22 +198,25 @@
                     <div class="toptitle">
                         <div class="t1"><label><input name="" type="checkbox" value="" id="chk">&nbsp;&nbsp;职位名称</label></div>
                         <div class="t2">公司名称</div>
-                        <div class="t3">工作地区</div>
+
                         <div class="t4">月薪</div>
-                        <div class="t5">收藏时间</div>
+
+                        <div class="t5">操作</div>
+
                         <div class="clear"></div>
                     </div>
-                    <div class="ilist userliststyle" style="background-color: rgb(255, 255, 255);">
-                        <div class="t1"><input name="y_id[]" id="y_id" type="checkbox" value="482">&nbsp;&nbsp;<a href="http://51itjob.net/jobs/jobs-show.php?id=1451" target="_blank" title="网络工程师（珠海市）">网络工程师（珠海...</a></div>
-                        <div class="t2"><a href="http://51itjob.net/company/company-show.php?id=444" target="_blank" title="深圳市华脉技术有限公司">深圳市华脉技术有限公...</a></div>
-                        <div class="t3">广东省/珠海市</div>
-                        <div class="t4">3000-6000</div>
-                        <div class="t5">2018-11-17</div>
+                    <div class="ilist userliststyle" style="background-color: rgb(255, 255, 255);" th:each="collect:${collect}">
+                        <div class="t1"><input name="y_id[]" id="y_id" type="checkbox" value="482">&nbsp;&nbsp;<a href="http://51itjob.net/jobs/jobs-show.php?id=1451" target="_blank" th:title="${collect.jobname}"><span th:text="${collect.jobname}"></span></a></div>
+                        <div class="t2"><a href="http://51itjob.net/company/company-show.php?id=444" target="_blank" th:title="${collect.companyname}"><span th:text="${collect.companyname}"></span></a></div>
+
+                        <div class="t4"><span th:text="${collect.salary}"></span></div>
+                        <div class="t5"><input type="submit" name="delete" id="submitsave" value="取消收藏" onclick="return confirm('您确定取消吗?')" class="but95_35lan"></div>
+
                         <div class="clear"></div>
                     </div>
-                    <div class="but">
-                        <input type="submit" name="delete" id="submitsave" value="删除所选" onclick="return confirm('您确定删除吗?')" class="but95_35lan">
-                    </div>
+                    <!--<div class="but">-->
+                        <!--<input type="submit" name="delete" id="submitsave" value="删除所选" onclick="return confirm('您确定删除吗?')" class="but95_35lan">-->
+                    <!--</div>-->
                     <table border="0" align="center" cellpadding="0" cellspacing="0" class="link_bk">
                         <tbody><tr>
                             <td height="50" align="center"> <div class="page link_bk"><li><a class="">首页</a></li><li><a class="">上一页</a></li><li><a class="select">1</a></li>

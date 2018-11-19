@@ -3,9 +3,9 @@ package net.togogo.bean;
 public class Collect {
     private Integer id;
 
-    private Integer userId;
+    private Integer user_Id;
 
-    private Integer detailId;
+    private Integer detail_Id;
 
     public Integer getId() {
         return id;
@@ -16,18 +16,27 @@ public class Collect {
     }
 
     public Integer getUserId() {
-        return userId;
+        return user_Id;
     }
 
     public void setUserId(Integer userId) {
-        this.userId = userId;
+        this.user_Id = userId;
     }
 
     public Integer getDetailId() {
-        return detailId;
+        return detail_Id;
     }
 
     public void setDetailId(Integer detailId) {
-        this.detailId = detailId;
+        this.detail_Id = detailId;
+    }
+
+    @Override
+    public String toString() {
+        return "Collect{" +
+                "id=" + id +
+                ", user_Id=" + user_Id +
+                ", detail_Id=" + detail_Id +
+                '}';
     }
 }

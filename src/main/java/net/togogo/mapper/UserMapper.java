@@ -6,6 +6,7 @@ import net.togogo.bean.UserExample;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 @Mapper
 public interface UserMapper {
@@ -27,6 +28,9 @@ public interface UserMapper {
 
     @Select("insert into t_user(username,password,email) values(#{username},#{password},#{email})")
     Integer insert(User user);
+
+    @Update("update t_user set sex=#{sex},degree=#{degree},phone=#{phone} where username=#{username}")
+    int updateuser(User user);
 
     int insertSelective(User record);
 

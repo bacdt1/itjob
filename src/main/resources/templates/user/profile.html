@@ -327,8 +327,8 @@
                     <div class="linktxt">
                         <ul>
                             <li style="background-color: rgb(255, 255, 255);"><a href="/userprofile">基本资料</a></li>
-                            <li style="background-color: rgb(255, 255, 255);"><a href="personal_user.php?act=password_edit">密码修改</a></li>
-                            <li style="background-color: rgb(255, 255, 255);"><a href="http://51itjob.net/user/login.php?act=logout">安全退出</a></li>
+                            <li style="background-color: rgb(255, 255, 255);"><a href="/userpassword">密码修改</a></li>
+                            <li style="background-color: rgb(255, 255, 255);"><a href="/logout">安全退出</a></li>
                         </ul>
                     </div>
                 </div>
@@ -342,27 +342,27 @@
                         <div class="h1-title">账户管理</div>
                     </div>
                     <div class="navs link_bk">
-                        <a href="?act=userprofile" class="se">基本资料</a>
-                        <a href="?act=password_edit">密码修改</a>
+                        <a href="/userprofile" class="se">基本资料</a>
+                        <a href="/userpassword">密码修改</a>
 
                         <div class="clear"></div>
                     </div>
                 </div>
-                <span th:object="${person}"/>
-                <form id="Form1" name="Form1" method="post" action="?act=userprofile_save">
+
+                <form id="Form1" name="Form1" method="post" action="/save_userprofile">
                     <table width="100%" border="0" cellspacing="0" cellpadding="0" class="tableall" style="margin-top:15px;" >
                         <tbody><tr>
                             <td width="125" align="right"><span class="nec">姓名</span>：</td>
-                            <td width="230"><input name="realname" type="text" class="input_text_200 valid" id="realname" maxlength="6" th:text="${person.username}"> </td>
+                            <td width="230"><p th:text="${person.username}"></p></td>
                         </tr>
                         <tr>
                             <td align="right"><span class="nec">性别</span>：</td>
                             <td>
                                 <div id="sex_radio">
                                     <input name="sex" id="sex" type="hidden" value="1">
-                                    <input name="sex_cn" id="sex_cn" type="hidden" value="男">
-                                    <div class="input_radio select" id="1">男</div>
-                                    <div class="input_radio " id="2">女</div>
+                                    <input name="sex_cn" id="sex_cn" type="hidden" th:value="${person.sex}">
+                                    <div class="input_radio select" id="1"><div th:if="${person.sex} != '女'">男</div><div th:if="${person.sex} != '男'">女</div></div>
+                                    <div class="input_radio " id="2"><div th:if="${person.sex} != '女'">女</div><div th:if="${person.sex} != '男'">男</div></div>
                                     <div class="clear"></div>
                                 </div>
                             </td>
@@ -374,7 +374,7 @@
                             <td align="right"><span class="nec">学历</span>：</td>
                             <td>
                                 <div style="position:relative;z-index:8">
-                                    <div id="education_menu" class="input_text_200_bg">博士</div>
+                                    <div id="education_menu" class="input_text_200_bg"><p th:text="${person.degree}"></p></div>
                                     <div class="menu" id="menu1">
                                         <ul>
                                             <li id="65" title="初中">初中</li>
@@ -390,7 +390,7 @@
                                     </div>
                                 </div>
                                 <input name="education" type="hidden" id="education" value="72">
-                                <input name="education_cn" type="hidden" id="education_cn" value="博士">
+                                <input name="education_cn" type="hidden" id="education_cn" th:value="${person.degree}">
                             </td>
                             <td>&nbsp;</td>
                         </tr>
@@ -398,7 +398,7 @@
                         <tr>
                             <td align="right"><span class="nec">手机</span>：</td>
                             <td>
-                                <input name="mobile" id="mobile" type="text" class="input_text_200" th:text="${#httpServletRequest.getParameter('person')}">
+                                <input name="mobile" id="mobile" type="text" class="input_text_200" th:value="${person.phone}">
                             </td>
 
                         </tr>
@@ -408,7 +408,7 @@
                         <tbody><tr>
                             <td width="125" align="right"><span class="nec">邮箱</span>：</td>
                             <td width="230" >
-                                <p th:object="${session.person.email}"></p>
+                                <p th:text="${person.email}"></p>
 
 
 

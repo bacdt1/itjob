@@ -4,6 +4,7 @@ import java.util.List;
 import net.togogo.bean.Detail;
 import net.togogo.bean.DetailExample;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 
 public interface DetailMapper {
     int countByExample(DetailExample example);
@@ -18,7 +19,11 @@ public interface DetailMapper {
 
     List<Detail> selectByExample(DetailExample example);
 
-    Detail selectByPrimaryKey(Integer id);
+    @Select("select * from t_detail where id = #{id}")
+    Detail selectbyid(int id);
+
+
+    Detail selectByPrimaryKey(int id);
 
     int updateByExampleSelective(@Param("record") Detail record, @Param("example") DetailExample example);
 

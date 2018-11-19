@@ -9,7 +9,7 @@ public class Detail {
 
     private Integer num;
 
-    private Integer jobId;
+    private Integer job_Id;
 
     private String sex;
 
@@ -19,7 +19,7 @@ public class Detail {
 
     private String description;
 
-    private Integer companyId;
+    private Integer company_Id;
 
     public Integer getId() {
         return id;
@@ -54,11 +54,11 @@ public class Detail {
     }
 
     public Integer getJobId() {
-        return jobId;
+        return job_Id;
     }
 
     public void setJobId(Integer jobId) {
-        this.jobId = jobId;
+        this.job_Id = jobId;
     }
 
     public String getSex() {
@@ -94,10 +94,10 @@ public class Detail {
     }
 
     public Integer getCompanyId() {
-        return companyId;
+        return company_Id;
     }
 
     public void setCompanyId(Integer companyId) {
-        this.companyId = companyId;
+        this.company_Id = companyId;
     }
 }

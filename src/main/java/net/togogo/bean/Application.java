@@ -3,9 +3,9 @@ package net.togogo.bean;
 public class Application {
     private Integer id;
 
-    private Integer userId;
+    private Integer user_Id;
 
-    private Integer detailId;
+    private Integer detail_Id;
 
     private Integer state;
 
@@ -18,19 +18,19 @@ public class Application {
     }
 
     public Integer getUserId() {
-        return userId;
+        return user_Id;
     }
 
     public void setUserId(Integer userId) {
-        this.userId = userId;
+        this.user_Id = userId;
     }
 
     public Integer getDetailId() {
-        return detailId;
+        return detail_Id;
     }
 
     public void setDetailId(Integer detailId) {
-        this.detailId = detailId;
+        this.detail_Id = detailId;
     }
 
     public Integer getState() {

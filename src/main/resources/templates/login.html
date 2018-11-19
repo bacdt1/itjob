@@ -67,6 +67,12 @@ e.preventDefault();
 
 				$(".login_err").html(errinfo);
 			}
+			else if(data=="succ"){
+                $("body").append(data);
+                window.location.href="/company_index";
+
+
+			}
 			else
 			{
 
@@ -136,7 +142,7 @@ e.preventDefault();
 													</div>
 						<div class="auto">
 
-							<a th:href="123">忘记密码？</a>
+
 							<div class="clear"></div>
 						</div>
 						<div class="input-box-waiting" id="waiting">
